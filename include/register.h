@@ -3,12 +3,17 @@
 
 #include <stdint.h>
 
-/*
- * Simulated GPIO Output Data Register
- */
+/* GPIO register */
 extern uint32_t GPIOA_ODR;
+
+/* UART registers */
 extern uint32_t UART_DATA;
 extern uint32_t UART_STATUS;
 extern uint32_t UART_CONTROL;
+
+/* Timer registers */
+extern uint32_t TIMER_COUNT;
+extern uint32_t TIMER_CONTROL;
+extern uint32_t TIMER_STATUS;
 
 #endif
