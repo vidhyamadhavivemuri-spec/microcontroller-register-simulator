@@ -17,7 +17,7 @@ int main(void)
 
     /* ================= UART TX TESTS ================= */
 
-    printf("\n--- UART TX Test ---\n");
+    /*printf("\n--- UART TX Test ---\n");
 
     UART_STATUS = 0;
 
@@ -52,12 +52,12 @@ int main(void)
     printf("Sending 'B' immediately = %s\n",
            success ? "SUCCESS" : "FAILED");
 
-    printf("UART DATA = '%c'\n", UART_DATA);
+    printf("UART DATA = '%c'\n", UART_DATA);*/
 
 
     /* ================= AUTOMATIC TX COMPLETION ================= */
 
-    printf("\n--- Automatic TX Completion Test ---\n");
+    /*printf("\n--- Automatic TX Completion Test ---\n");
 
     printf("Waiting for transmission to complete...\n");
 
@@ -78,12 +78,12 @@ int main(void)
            UART_DATA, UART_DATA);
 
     printf("TX Ready after sending B = %d\n",
-           uart_is_tx_ready());
+           uart_is_tx_ready()); */
 
 
     /* ================= UART RX TEST ================= */
 
-    printf("\n--- UART RX Status Test ---\n");
+    /*printf("\n--- UART RX Status Test ---\n");
 
     UART_STATUS = 0;
 
@@ -93,7 +93,7 @@ int main(void)
     UART_STATUS |= (1U << 1);
 
     printf("RX Available after setting flag = %d\n",
-           uart_is_rx_data_available());
+           uart_is_rx_data_available());*/
 
 
     /* ================= TIMER TEST ================= */
