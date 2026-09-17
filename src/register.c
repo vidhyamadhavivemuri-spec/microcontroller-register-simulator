@@ -12,3 +12,5 @@ uint32_t UART_CONTROL = 0;
 uint32_t TIMER_COUNT = 0;
 uint32_t TIMER_CONTROL = 0;
 uint32_t TIMER_STATUS = 0;
+uint32_t INT_ENABLE = 0;
+uint32_t INT_PENDING = 0;

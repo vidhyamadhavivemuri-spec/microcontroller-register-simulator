@@ -1,6 +1,6 @@
 #include "timer.h"
 #include "register.h"
-
+#include "interrupt.h"
 void timer_start(void)
 {
     TIMER_CONTROL |= (1U << 0);
@@ -26,6 +26,7 @@ void timer_update(void)
     if (TIMER_COUNT == 0)
     {
         TIMER_STATUS |= (1U << 0);
+        interrupt_int0_trigger();
     }
 }
 void timer_clear_overflow(void)
