@@ -15,5 +15,6 @@ extern uint32_t UART_CONTROL;
 extern uint32_t TIMER_COUNT;
 extern uint32_t TIMER_CONTROL;
 extern uint32_t TIMER_STATUS;
-
+extern uint32_t INT_ENABLE;
+extern uint32_t INT_PENDING;
 #endif
