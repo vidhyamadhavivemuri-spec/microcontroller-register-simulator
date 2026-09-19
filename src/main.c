@@ -1,9 +1,5 @@
 #include <stdio.h>
-#include <stdbool.h>
-
 #include "register.h"
-#include "gpio.h"
-#include "uart.h"
 #include "timer.h"
 #include "interrupt.h"
 
@@ -98,7 +94,7 @@ int main(void)
 
     /* ================= TIMER TEST ================= */
 
-    printf("\n--- Timer Test ---\n");
+    /*printf("\n--- Timer Test ---\n");
 
     TIMER_COUNT = 0;
     TIMER_CONTROL = 0;
@@ -128,12 +124,12 @@ int main(void)
     timer_update();
 
     printf("Timer Count after update while stopped = %u\n",
-           TIMER_COUNT);
+           TIMER_COUNT); */
 
 
     /* ================= TIMER OVERFLOW TEST ================= */
 
-    printf("\n--- Timer Overflow Test ---\n");
+    /*printf("\n--- Timer Overflow Test ---\n");
 
     TIMER_COUNT = 255;
     TIMER_CONTROL = 0;
@@ -150,12 +146,12 @@ int main(void)
            TIMER_COUNT);
 
     printf("Overflow Flag = %d\n",
-           (TIMER_STATUS & (1U << 0)) != 0);
+           (TIMER_STATUS & (1U << 0)) != 0);*/
 
 
     /* ================= STICKY OVERFLOW TEST ================= */
 
-    printf("\n--- Sticky Overflow Test ---\n");
+    /*printf("\n--- Sticky Overflow Test ---\n");
 
     TIMER_COUNT = 255;
     TIMER_STATUS = 0;
@@ -179,7 +175,7 @@ int main(void)
     timer_clear_overflow();
 
     printf("Overflow Flag after software clear = %d\n",
-           (TIMER_STATUS & (1U << 0)) != 0);
+           (TIMER_STATUS & (1U << 0)) != 0);*/
 
 
     /* ================= INTERRUPT TEST ================= */
