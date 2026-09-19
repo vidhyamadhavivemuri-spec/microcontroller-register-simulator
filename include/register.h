@@ -17,4 +17,10 @@ extern uint32_t TIMER_CONTROL;
 extern uint32_t TIMER_STATUS;
 extern uint32_t INT_ENABLE;
 extern uint32_t INT_PENDING;
+
+/* ADC registers */
+
+extern uint32_t ADC_DATA;
+extern uint32_t ADC_CONTROL;
+extern uint32_t ADC_STATUS;
 #endif
