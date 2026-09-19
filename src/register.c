@@ -22,6 +22,12 @@ uint32_t ADC_DATA = 0;
 uint32_t ADC_CONTROL = 0;
 uint32_t ADC_STATUS = 0;
 
+/* PWM registers */
+
+uint32_t PWM_DUTY = 0;
+uint32_t PWM_CONTROL = 0;
+uint32_t PWM_STATUS = 0;
+
 /* Interrupt registers */
 
 uint32_t INT_ENABLE = 0;

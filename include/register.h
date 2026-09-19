@@ -23,4 +23,12 @@ extern uint32_t INT_PENDING;
 extern uint32_t ADC_DATA;
 extern uint32_t ADC_CONTROL;
 extern uint32_t ADC_STATUS;
+
+/* PWM registers */
+
+extern uint32_t PWM_DUTY;
+
+extern uint32_t PWM_CONTROL;
+
+extern uint32_t PWM_STATUS;
 #endif
