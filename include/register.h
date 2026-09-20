@@ -35,4 +35,10 @@ extern uint32_t PWM_STATUS;
 extern uint32_t SPI_DATA;
 extern uint32_t SPI_CONTROL;
 extern uint32_t SPI_STATUS;
+
+/* I2C registers */
+extern uint32_t I2C_DATA;
+extern uint32_t I2C_ADDRESS;
+extern uint32_t I2C_CONTROL;
+extern uint32_t I2C_STATUS;
 #endif

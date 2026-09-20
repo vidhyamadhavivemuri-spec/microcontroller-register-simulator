@@ -38,3 +38,9 @@ uint32_t INT_PENDING = 0;
 uint32_t SPI_DATA = 0;
 uint32_t SPI_CONTROL = 0;
 uint32_t SPI_STATUS = 0;
+
+/* I2C registers */
+uint32_t I2C_DATA = 0;
+uint32_t I2C_ADDRESS = 0;
+uint32_t I2C_CONTROL = 0;
+uint32_t I2C_STATUS = 0;
