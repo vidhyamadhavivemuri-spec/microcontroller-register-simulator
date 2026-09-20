@@ -32,3 +32,9 @@ uint32_t PWM_STATUS = 0;
 
 uint32_t INT_ENABLE = 0;
 uint32_t INT_PENDING = 0;
+
+/* SPI registers */
+
+uint32_t SPI_DATA = 0;
+uint32_t SPI_CONTROL = 0;
+uint32_t SPI_STATUS = 0;

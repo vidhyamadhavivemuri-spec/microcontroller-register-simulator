@@ -31,4 +31,8 @@ extern uint32_t PWM_DUTY;
 extern uint32_t PWM_CONTROL;
 
 extern uint32_t PWM_STATUS;
+
+extern uint32_t SPI_DATA;
+extern uint32_t SPI_CONTROL;
+extern uint32_t SPI_STATUS;
 #endif
