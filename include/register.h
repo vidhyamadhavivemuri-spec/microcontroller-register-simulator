@@ -41,4 +41,9 @@ extern uint32_t I2C_DATA;
 extern uint32_t I2C_ADDRESS;
 extern uint32_t I2C_CONTROL;
 extern uint32_t I2C_STATUS;
+
+extern uint32_t WDT_COUNT;
+extern uint32_t WDT_TIMEOUT;
+extern uint32_t WDT_CONTROL;
+extern uint32_t WDT_STATUS;
 #endif

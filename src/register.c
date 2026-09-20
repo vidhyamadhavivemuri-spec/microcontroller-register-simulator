@@ -44,3 +44,9 @@ uint32_t I2C_DATA = 0;
 uint32_t I2C_ADDRESS = 0;
 uint32_t I2C_CONTROL = 0;
 uint32_t I2C_STATUS = 0;
+
+/* Watchdog Timer registers */
+uint32_t WDT_COUNT = 0;
+uint32_t WDT_TIMEOUT = 0;
+uint32_t WDT_CONTROL = 0;
+uint32_t WDT_STATUS = 0;
