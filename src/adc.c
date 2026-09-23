@@ -1,6 +1,6 @@
 #include "adc.h"
 #include "register.h"
-
+#include "interrupt.h"
 bool adc_is_conversion_complete(void)
 {
     return (ADC_STATUS & (1U << 0)) != 0;
@@ -45,6 +45,6 @@ void adc_update(void)
     }
 
     ADC_STATUS |= (1U << 0);
-
+    interrupt_int1_trigger();
     ADC_CONTROL &= ~(1U << 0);
 }
