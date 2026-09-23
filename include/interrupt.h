@@ -4,12 +4,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+typedef void (*interrupt_handler_t)(void);
 #define INT0_BIT_MASK (1U << 0)
 #define INT1_BIT_MASK (1U << 1)
 
 /* Interrupt controller initialization */
 void interrupt_init(void);
-
+void interrupt_register_handler(uint8_t interrupt_number,
+                                interrupt_handler_t handler);
 /* INT0 control */
 void interrupt_int0_enable(void);
 void interrupt_int0_disable(void);

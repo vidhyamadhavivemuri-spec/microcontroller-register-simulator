@@ -1,10 +1,26 @@
+#include <stddef.h>
 #include "interrupt.h"
 #include "register.h"
 
+static interrupt_handler_t int0_handler = NULL;
+static interrupt_handler_t int1_handler = NULL;
 void interrupt_init(void)
 {
     INT_ENABLE = 0;
     INT_PENDING = 0;
+}
+
+void interrupt_register_handler(uint8_t interrupt_number,
+                                interrupt_handler_t handler)
+{
+    if (interrupt_number == 0)
+    {
+        int0_handler = handler;
+    }
+    else if (interrupt_number == 1)
+    {
+        int1_handler = handler;
+    }
 }
 
 void interrupt_int0_enable(void)
@@ -38,6 +54,12 @@ bool interrupt_service_int0(void)
     if (interrupt_int0_is_pending_and_enabled())
     {
         interrupt_int0_clear();
+
+        if (int0_handler != NULL)
+        {
+            int0_handler();
+        }
+
         return true;
     }
 
@@ -84,6 +106,12 @@ bool interrupt_service_int1(void)
         (INT_PENDING & INT1_BIT_MASK))
     {
         interrupt_int1_clear();
+
+        if (int1_handler != NULL)
+        {
+            int1_handler();
+        }
+
         return true;
     }
 
