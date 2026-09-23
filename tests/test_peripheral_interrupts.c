@@ -5,13 +5,17 @@
 #include "adc.h"
 #include "interrupt.h"
 #include "register.h"
+#include "events.h"
 
 static int timer_handler_called = 0;
 static int adc_handler_called = 0;
+
 void test_timer_handler(void)
 {
     timer_handler_called++;
+    events_set_timer_event();
 }
+
 void test_timer_interrupt_handler(void)
 {
     interrupt_init();
@@ -37,11 +41,21 @@ void test_timer_interrupt_handler(void)
 
     assert(INT_PENDING == 0);
     assert(timer_handler_called == 1);
+
+    /* Verify that the Timer ISR generated an application event. */
+    assert(events_is_timer_event_pending() == true);
+
+    /* Consume the Timer event. */
+    events_clear_timer_event();
+
+    assert(events_is_timer_event_pending() == false);
 }
+
 void test_adc_handler(void)
 {
     adc_handler_called++;
 }
+
 void test_adc_interrupt_handler(void)
 {
     interrupt_init();
