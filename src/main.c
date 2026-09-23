@@ -7,6 +7,7 @@
 #include "events.h"
 #include "application.h"
 
+
 /* Timer interrupt handler */
 void timer_handler(void)
 {
@@ -28,6 +29,7 @@ int main(void)
     printf("--- System Initialization ---\n");
 
     interrupt_init();
+    application_init();
 
     interrupt_register_handler(0, timer_handler);
     interrupt_register_handler(1, adc_handler);
@@ -66,6 +68,8 @@ int main(void)
 
     /* Application processes Timer event. */
     application_process_events();
+    printf("Timer Events Processed = %u\n",
+       application_get_timer_event_count());
 
     printf("Timer Event Pending after application processing = %s\n",
            events_is_timer_event_pending() ? "YES" : "NO");
