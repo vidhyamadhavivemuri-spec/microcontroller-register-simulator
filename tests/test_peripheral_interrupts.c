@@ -54,6 +54,7 @@ void test_timer_interrupt_handler(void)
 void test_adc_handler(void)
 {
     adc_handler_called++;
+    events_set_adc_event();
 }
 
 void test_adc_interrupt_handler(void)
@@ -79,6 +80,11 @@ void test_adc_interrupt_handler(void)
 
     assert(INT_PENDING == 0);
     assert(adc_handler_called == 1);
+    assert(events_is_adc_event_pending() == true);
+
+    events_clear_adc_event();
+
+    assert(events_is_adc_event_pending() == false);
 }
 
 int main(void)
