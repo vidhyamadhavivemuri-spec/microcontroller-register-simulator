@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "application.h"
 #include "timer.h"
 #include "adc.h"
 #include "interrupt.h"
@@ -45,8 +46,7 @@ void test_timer_interrupt_handler(void)
     /* Verify that the Timer ISR generated an application event. */
     assert(events_is_timer_event_pending() == true);
 
-    /* Consume the Timer event. */
-    events_clear_timer_event();
+    application_process_events();
 
     assert(events_is_timer_event_pending() == false);
 }
@@ -82,7 +82,7 @@ void test_adc_interrupt_handler(void)
     assert(adc_handler_called == 1);
     assert(events_is_adc_event_pending() == true);
 
-    events_clear_adc_event();
+    application_process_events();
 
     assert(events_is_adc_event_pending() == false);
 }
