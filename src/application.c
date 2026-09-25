@@ -1,11 +1,14 @@
 #include "application.h"
 #include "events.h"
+#include "adc.h"
 
 static unsigned int timer_event_count = 0;
+static int last_adc_value = -1;
 
 void application_init(void)
 {
     timer_event_count = 0;
+    last_adc_value = -1;
 }
 
 void application_process_events(void)
@@ -18,7 +21,13 @@ void application_process_events(void)
 
     if (events_is_adc_event_pending())
     {
-        /* Handle ADC event. */
+        int value = adc_read();
+
+        if (value >= 0)
+        {
+            last_adc_value = value;
+        }
+
         events_clear_adc_event();
     }
 }
@@ -26,4 +35,9 @@ void application_process_events(void)
 unsigned int application_get_timer_event_count(void)
 {
     return timer_event_count;
+}
+
+int application_get_last_adc_value(void)
+{
+    return last_adc_value;
 }

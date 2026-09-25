@@ -7,7 +7,6 @@
 #include "events.h"
 #include "application.h"
 
-
 /* Timer interrupt handler */
 void timer_handler(void)
 {
@@ -52,12 +51,13 @@ int main(void)
     timer_update();
 
     printf("Timer Count = %u\n", TIMER_COUNT);
+
     printf("Timer Overflow = %s\n",
            (TIMER_STATUS & (1U << 0)) ? "YES" : "NO");
 
     printf("INT_PENDING = %u\n", INT_PENDING);
 
-    /* Service Timer interrupt. */
+    /* Service Timer interrupt */
     interrupt_service_next();
 
     printf("INT_PENDING after interrupt service = %u\n",
@@ -66,10 +66,11 @@ int main(void)
     printf("Timer Event Pending = %s\n",
            events_is_timer_event_pending() ? "YES" : "NO");
 
-    /* Application processes Timer event. */
+    /* Application processes Timer event */
     application_process_events();
+
     printf("Timer Events Processed = %u\n",
-       application_get_timer_event_count());
+           application_get_timer_event_count());
 
     printf("Timer Event Pending after application processing = %s\n",
            events_is_timer_event_pending() ? "YES" : "NO");
@@ -82,18 +83,21 @@ int main(void)
     ADC_STATUS = 0;
     ADC_DATA = 0;
 
+    /* Simulate an ADC conversion producing 512 */
     adc_set_value(512);
+
     adc_start_conversion();
 
     adc_update();
 
-    printf("ADC Data = %u\n", ADC_DATA);
+    printf("ADC Data Register = %u\n", ADC_DATA);
+
     printf("ADC Conversion Complete = %s\n",
            adc_is_conversion_complete() ? "YES" : "NO");
 
     printf("INT_PENDING = %u\n", INT_PENDING);
 
-    /* Service ADC interrupt. */
+    /* Service ADC interrupt */
     interrupt_service_next();
 
     printf("INT_PENDING after interrupt service = %u\n",
@@ -102,11 +106,21 @@ int main(void)
     printf("ADC Event Pending = %s\n",
            events_is_adc_event_pending() ? "YES" : "NO");
 
-    /* Application processes ADC event. */
+    /*
+     * Application processes the ADC event.
+     * application.c calls adc_read() instead of
+     * directly accessing ADC_DATA.
+     */
     application_process_events();
+
+    printf("Last ADC Value = %d\n",
+           application_get_last_adc_value());
 
     printf("ADC Event Pending after application processing = %s\n",
            events_is_adc_event_pending() ? "YES" : "NO");
+
+    printf("ADC Conversion Complete after application processing = %s\n",
+           adc_is_conversion_complete() ? "YES" : "NO");
 
     /* ================= COMPLETE ================= */
 
