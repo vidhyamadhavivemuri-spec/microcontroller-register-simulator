@@ -116,6 +116,9 @@ int main(void)
     printf("Last ADC Value = %d\n",
            application_get_last_adc_value());
 
+    printf("ADC State = %s\n",
+           application_get_adc_state() == ADC_ALERT ? "ALERT" : "NORMAL");
+
     printf("ADC Event Pending after application processing = %s\n",
            events_is_adc_event_pending() ? "YES" : "NO");
 

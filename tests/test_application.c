@@ -103,6 +103,39 @@ void test_adc_value_processing(void)
     assert(events_is_adc_event_pending() == false);
 }
 
+void test_adc_state_processing(void)
+{
+    application_init();
+    interrupt_init();
+
+    interrupt_register_handler(1, test_adc_handler);
+    interrupt_int1_enable();
+
+    ADC_CONTROL = 0;
+    ADC_STATUS = 0;
+    ADC_DATA = 0;
+
+    /* Test NORMAL state */
+    adc_set_value(512);
+    adc_start_conversion();
+    adc_update();
+
+    interrupt_service_next();
+    application_process_events();
+
+    assert(application_get_adc_state() == ADC_NORMAL);
+
+    /* Test ALERT state */
+    adc_set_value(800);
+    adc_start_conversion();
+    adc_update();
+
+    interrupt_service_next();
+    application_process_events();
+
+    assert(application_get_adc_state() == ADC_ALERT);
+}
+
 int main(void)
 {
     test_timer_event_processing();
@@ -110,6 +143,7 @@ int main(void)
     test_both_events_processing();
     test_timer_event_count();
     test_adc_value_processing();
+    test_adc_state_processing();
 
     printf("Application event processing tests passed!\n");
 
