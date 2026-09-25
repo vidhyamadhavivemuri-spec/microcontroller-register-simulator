@@ -13,5 +13,6 @@ void application_process_events(void);
 unsigned int application_get_timer_event_count(void);
 int application_get_last_adc_value(void);
 adc_state_t application_get_adc_state(void);
+unsigned int application_get_alert_event_count(void);
 
 #endif

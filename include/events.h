@@ -13,4 +13,7 @@ void events_set_adc_event(void);
 bool events_is_adc_event_pending(void);
 void events_clear_adc_event(void);
 
+void events_set_alert_event(void);
+bool events_is_alert_event_pending(void);
+void events_clear_alert_event(void);
 #endif
