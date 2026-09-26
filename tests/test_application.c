@@ -257,6 +257,7 @@ void test_alert_status(void)
 
     assert(application_get_adc_state() == ADC_NORMAL);
     assert(application_get_alert_status() == ALERT_NOT_ACTIVE);
+    assert(system_get_state() == SYSTEM_RUNNING);
 
     /* Alert ADC value */
     ADC_DATA = 800;
@@ -267,6 +268,7 @@ void test_alert_status(void)
 
     assert(application_get_adc_state() == ADC_ALERT);
     assert(application_get_alert_status() == ALERT_ACTIVE);
+    assert(system_get_state() == SYSTEM_ALERT);
 
     /* Return to normal */
     ADC_DATA = 500;
@@ -277,6 +279,7 @@ void test_alert_status(void)
 
     assert(application_get_adc_state() == ADC_NORMAL);
     assert(application_get_alert_status() == ALERT_NOT_ACTIVE);
+    assert(system_get_state() == SYSTEM_RUNNING);
 }
 void test_alert_output_status(void)
 {

@@ -7,6 +7,7 @@
 #include "events.h"
 #include "application.h"
 #include "alert_output.h"
+#include "system.h"
 
 /* Timer interrupt handler */
 void timer_handler(void)
@@ -30,6 +31,11 @@ int main(void)
 
     interrupt_init();
     application_init();
+
+    printf("System State = %s\n",
+           system_get_state() == SYSTEM_INIT ? "INIT" :
+           system_get_state() == SYSTEM_RUNNING ? "RUNNING" :
+           "ALERT");
 
     interrupt_register_handler(0, timer_handler);
     interrupt_register_handler(1, adc_handler);
@@ -70,6 +76,11 @@ int main(void)
     /* Application processes Timer event */
     application_process_events();
 
+    printf("System State = %s\n",
+           system_get_state() == SYSTEM_INIT ? "INIT" :
+           system_get_state() == SYSTEM_RUNNING ? "RUNNING" :
+           "ALERT");
+
     printf("Timer Events Processed = %u\n",
            application_get_timer_event_count());
 
@@ -84,7 +95,7 @@ int main(void)
     ADC_STATUS = 0;
     ADC_DATA = 0;
 
-    /* Simulate an ADC conversion producing 512 */
+    /* Simulate an ADC conversion producing 800 */
     adc_set_value(800);
 
     adc_start_conversion();
@@ -125,13 +136,21 @@ int main(void)
 
     printf("ADC Conversion Complete after application processing = %s\n",
            adc_is_conversion_complete() ? "YES" : "NO");
+
     printf("Alert Status = %s\n",
-       application_get_alert_status() == ALERT_ACTIVE ? "ACTIVE" : "NOT ACTIVE");
+           application_get_alert_status() == ALERT_ACTIVE ? "ACTIVE" : "NOT ACTIVE");
+
+    printf("System State = %s\n",
+           system_get_state() == SYSTEM_INIT ? "INIT" :
+           system_get_state() == SYSTEM_RUNNING ? "RUNNING" :
+           "ALERT");
 
     printf("Alert Output = %s\n",
-       application_get_alert_output_status() == ALERT_OUTPUT_ON ? "ON" : "OFF");
+           application_get_alert_output_status() == ALERT_OUTPUT_ON ? "ON" : "OFF");
+
     printf("Actual Alert Output Module = %s\n",
-       alert_output_is_on() ? "ON" : "OFF");
+           alert_output_is_on() ? "ON" : "OFF");
+
     /* ================= COMPLETE ================= */
 
     printf("\n--- Application Simulation Complete ---\n");

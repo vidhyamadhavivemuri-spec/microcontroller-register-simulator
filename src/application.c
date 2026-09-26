@@ -12,6 +12,8 @@ static alert_output_status_t alert_output_status = ALERT_OUTPUT_OFF;
 
 void application_init(void)
 {
+    system_init();
+
     timer_event_count = 0;
     alert_event_count = 0;
     last_adc_value = -1;
@@ -25,6 +27,8 @@ void application_init(void)
 
 void application_process_events(void)
 {
+    system_update();
+
     /* Process Timer event */
     if (events_is_timer_event_pending())
     {
@@ -52,6 +56,7 @@ void application_process_events(void)
                 alert_status = ALERT_NOT_ACTIVE;
                 alert_output_status = ALERT_OUTPUT_OFF;
                 alert_output_off();
+                system_clear_alert();
                 events_clear_alert_event();
             }
         }
@@ -62,6 +67,8 @@ void application_process_events(void)
     /* Process Alert event */
     if (events_is_alert_event_pending())
     {
+        system_set_alert();
+
         alert_event_count++;
         alert_status = ALERT_ACTIVE;
         alert_output_status = ALERT_OUTPUT_ON;
