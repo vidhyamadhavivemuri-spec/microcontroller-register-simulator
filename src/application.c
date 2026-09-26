@@ -7,6 +7,7 @@ static int last_adc_value = -1;
 static adc_state_t adc_state = ADC_NORMAL;
 static unsigned int alert_event_count = 0;
 static alert_status_t alert_status = ALERT_NOT_ACTIVE;
+static alert_output_status_t alert_output_status = ALERT_OUTPUT_OFF;
 
 void application_init(void)
 {
@@ -15,6 +16,7 @@ void application_init(void)
     last_adc_value = -1;
     adc_state = ADC_NORMAL;
     alert_status = ALERT_NOT_ACTIVE;
+    alert_output_status = ALERT_OUTPUT_OFF;
 
     events_clear_alert_event();
 }
@@ -46,6 +48,7 @@ void application_process_events(void)
             {
                 adc_state = ADC_NORMAL;
                 alert_status = ALERT_NOT_ACTIVE;
+                alert_output_status = ALERT_OUTPUT_OFF;
                 events_clear_alert_event();
             }
         }
@@ -58,6 +61,7 @@ void application_process_events(void)
     {
         alert_event_count++;
         alert_status = ALERT_ACTIVE;
+        alert_output_status = ALERT_OUTPUT_ON;
         events_clear_alert_event();
     }
 }
@@ -85,4 +89,8 @@ unsigned int application_get_alert_event_count(void)
 alert_status_t application_get_alert_status(void)
 {
     return alert_status;
+}
+alert_output_status_t application_get_alert_output_status(void)
+{
+    return alert_output_status;
 }

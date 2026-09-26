@@ -277,6 +277,37 @@ void test_alert_status(void)
     assert(application_get_adc_state() == ADC_NORMAL);
     assert(application_get_alert_status() == ALERT_NOT_ACTIVE);
 }
+void test_alert_output_status(void)
+{
+    application_init();
+
+    /* Normal state */
+    ADC_DATA = 500;
+    ADC_STATUS = 1;
+    events_set_adc_event();
+
+    application_process_events();
+
+    assert(application_get_alert_output_status() == ALERT_OUTPUT_OFF);
+
+    /* Alert state */
+    ADC_DATA = 800;
+    ADC_STATUS = 1;
+    events_set_adc_event();
+
+    application_process_events();
+
+    assert(application_get_alert_output_status() == ALERT_OUTPUT_ON);
+
+    /* Return to normal */
+    ADC_DATA = 500;
+    ADC_STATUS = 1;
+    events_set_adc_event();
+
+    application_process_events();
+
+    assert(application_get_alert_output_status() == ALERT_OUTPUT_OFF);
+}
 
 int main(void)
 {
@@ -290,6 +321,7 @@ int main(void)
     test_adc_alert_event();
     test_alert_event_count();
     test_alert_status();
+    test_alert_output_status();
 
     printf("Application event processing tests passed!\n");
 

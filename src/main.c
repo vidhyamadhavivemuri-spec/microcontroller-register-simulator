@@ -84,7 +84,7 @@ int main(void)
     ADC_DATA = 0;
 
     /* Simulate an ADC conversion producing 512 */
-    adc_set_value(512);
+    adc_set_value(800);
 
     adc_start_conversion();
 
@@ -124,7 +124,11 @@ int main(void)
 
     printf("ADC Conversion Complete after application processing = %s\n",
            adc_is_conversion_complete() ? "YES" : "NO");
+    printf("Alert Status = %s\n",
+       application_get_alert_status() == ALERT_ACTIVE ? "ACTIVE" : "NOT ACTIVE");
 
+    printf("Alert Output = %s\n",
+       application_get_alert_output_status() == ALERT_OUTPUT_ON ? "ON" : "OFF");
     /* ================= COMPLETE ================= */
 
     printf("\n--- Application Simulation Complete ---\n");
