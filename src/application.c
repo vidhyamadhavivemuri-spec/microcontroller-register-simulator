@@ -1,6 +1,7 @@
 #include "application.h"
 #include "events.h"
 #include "adc.h"
+#include "alert_output.h"
 
 static unsigned int timer_event_count = 0;
 static int last_adc_value = -1;
@@ -17,6 +18,7 @@ void application_init(void)
     adc_state = ADC_NORMAL;
     alert_status = ALERT_NOT_ACTIVE;
     alert_output_status = ALERT_OUTPUT_OFF;
+    alert_output_init();
 
     events_clear_alert_event();
 }
@@ -49,6 +51,7 @@ void application_process_events(void)
                 adc_state = ADC_NORMAL;
                 alert_status = ALERT_NOT_ACTIVE;
                 alert_output_status = ALERT_OUTPUT_OFF;
+                alert_output_off();
                 events_clear_alert_event();
             }
         }
@@ -62,6 +65,7 @@ void application_process_events(void)
         alert_event_count++;
         alert_status = ALERT_ACTIVE;
         alert_output_status = ALERT_OUTPUT_ON;
+        alert_output_on();
         events_clear_alert_event();
     }
 }

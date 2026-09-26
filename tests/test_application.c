@@ -1,11 +1,12 @@
 #include <assert.h>
 #include <stdio.h>
-
+#include <stdbool.h>
 #include "application.h"
 #include "events.h"
 #include "adc.h"
 #include "interrupt.h"
 #include "register.h"
+#include "alert_output.h"
 
 void test_timer_event_processing(void)
 {
@@ -289,6 +290,7 @@ void test_alert_output_status(void)
     application_process_events();
 
     assert(application_get_alert_output_status() == ALERT_OUTPUT_OFF);
+    assert(alert_output_is_on() == 0);
 
     /* Alert state */
     ADC_DATA = 800;
@@ -298,6 +300,7 @@ void test_alert_output_status(void)
     application_process_events();
 
     assert(application_get_alert_output_status() == ALERT_OUTPUT_ON);
+    assert(alert_output_is_on() == 1);
 
     /* Return to normal */
     ADC_DATA = 500;
@@ -307,6 +310,7 @@ void test_alert_output_status(void)
     application_process_events();
 
     assert(application_get_alert_output_status() == ALERT_OUTPUT_OFF);
+    assert(alert_output_is_on() == 0);
 }
 
 int main(void)

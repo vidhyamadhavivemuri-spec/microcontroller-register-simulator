@@ -6,6 +6,7 @@
 #include "interrupt.h"
 #include "events.h"
 #include "application.h"
+#include "alert_output.h"
 
 /* Timer interrupt handler */
 void timer_handler(void)
@@ -129,6 +130,8 @@ int main(void)
 
     printf("Alert Output = %s\n",
        application_get_alert_output_status() == ALERT_OUTPUT_ON ? "ON" : "OFF");
+    printf("Actual Alert Output Module = %s\n",
+       alert_output_is_on() ? "ON" : "OFF");
     /* ================= COMPLETE ================= */
 
     printf("\n--- Application Simulation Complete ---\n");
